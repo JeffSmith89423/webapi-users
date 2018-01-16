@@ -1,20 +1,20 @@
 <template>
 
-    <div class="navbar navbar-default">
+    <div class="navbar navbar-inverse">
         <div>
             <div class="col-xs-8">
-                <h3>Keepr.</h3>
+               <a href="#"><h3>Keepr.</h3></a>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-3 push-right">
                 <h3 v-if="user.username">Welcome, {{user.username}}</h3>
                 <h3 v-if="!user.username">Welcome, guest</h3>
             </div>
 
-            <h3 class="col-xs-1">
+            <h3 v-if="user.username" class="col-xs-1 push-right">
                 <a @click="logout">Log Out</a>
             </h3>
 
-            <h3 class="col-xs-1">
+            <h3 v-else="!user.username" class="col-xs-1 push-right">
                 <a href="#login">Log In</a>
             </h3>
         </div>
@@ -31,31 +31,41 @@
         },
         computed: {
             user() {
-                
+
                 // debugger
                 return this.$store.state.user
             },
         },
         methods: {
             // login() {
-                //     debugger
-                //     this.$store.dispatch('authenticate')
-                // },
-                logout() {
-                    // debugger
-                    this.$store.dispatch('logout')
-                }
+            //     debugger
+            //     this.$store.dispatch('authenticate')
+            // },
+            logout() {
+                // debugger
+                this.$store.dispatch('logout')
             },
-            components: {
+            login() {
+                // debugger
+                this.$store.dispatch('')
+            }
+        },
+        components: {
 
-            },
-            mounted() {
-                this.$store.dispatch('authenticate')
-            },
-        }
-        
-        </script>
+        },
+        mounted() {
+            this.$store.dispatch('authenticate')
+        },
+    }
+
+</script>
 
 
 <style scoped>
+.push-right{
+    text-align: right;
+}
+.navbar{
+    color: silver;
+}
 </style>

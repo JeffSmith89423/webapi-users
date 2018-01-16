@@ -21,7 +21,14 @@
 </script>
 
 <style>
-  
+  body{
+    background-image: url("./assets/background.jpg");
+    height: 100vh;
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+    /* background-position: center center; */
+    /* background-attachment: fixed; */
+  }
     
     
   

@@ -22,6 +22,9 @@
             </div>
 
         </div>
+
+        <!-- DELETE BELOW THIS LINE -->
+
         <!-- <div class="row text-center">
             <div @click="setActiveRecipe(result)" class="card col-lg-8" style="width: 28rem;" v-for="result in results" draggable="true"
                 v-on:dragstart.capture="moving">
@@ -42,6 +45,8 @@
                 </div>
             </div>
         </div> -->
+
+        <!-- DELETE ABOVE THIS LINE -->
 
     </div>
 </template>

@@ -24,7 +24,7 @@ vue.use(router)
 var store = new vuex.Store({
     state: {
         user: {},
-        err: {},
+        keeps: [],
     },
     mutations: {
         setUser(state, user) {
@@ -85,7 +85,7 @@ var store = new vuex.Store({
             auth.delete('accounts/logout')
                 .then(res => {
                     commit('setUser', {})
-                    router.push({ name: 'Login' })
+                    router.push({ name: 'Home' })
                     console.log('User session terminated')
                 })
                 .catch(err => {
