@@ -1,10 +1,10 @@
 using System;
 using System.Data;
-using API_Users.Models;
+using Keepr.Models;
 using Dapper;
 using MySql.Data.MySqlClient;
 
-namespace API_Users.Repositories
+namespace Keepr.Repositories
 {
     public class UserRepository : DbContext
     {
@@ -69,7 +69,13 @@ namespace API_Users.Repositories
             User savedUser = _db.QueryFirstOrDefault<User>(@"
             SELECT * FROM users WHERE id = @id
             ", new { id });
+            if(savedUser != null){
             return savedUser.GetReturnModel();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         internal UserReturnModel UpdateUser(UserReturnModel user)

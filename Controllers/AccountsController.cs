@@ -2,20 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using API_Users.Models;
-using API_Users.Repositories;
+using Keepr.Models;
+using Keepr.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API_Users.Controllers
+namespace Keepr.Controllers
 {
     [Route("[controller]")]
-    public class AccountController : Controller
+    public class AccountsController : Controller
     {
         private readonly UserRepository _db;
 
-        public AccountController(UserRepository repo)
+        public AccountsController(UserRepository repo)
         {
             _db = repo;
         }
@@ -35,6 +35,14 @@ namespace API_Users.Controllers
             }
             return null;
         }
+
+        [HttpDelete("logout")]
+       public async void Logout()
+       {
+         
+           await HttpContext.SignOutAsync();
+         
+       }
 
         [HttpPost("login")]
         public async Task<UserReturnModel> Login([FromBody]LoginUserModel creds)
