@@ -1,5 +1,6 @@
 <template>
     <div class="vaults">
+        <!-- BEGIN ADD A VAULT -->
         <div class="row text-center">
             <div class="card col-lg-2 glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal">
                 <div class="row glyphicon-glyphicon-plus"></div>
@@ -8,9 +9,20 @@
                 </div>
             </div>
         </div>
-        <!-- MODAL BEGIN -->
-        <!-- Trigger the modal with a button -->
+        <!-- END ADD A VAULT -->
 
+        <!-- BEGIN VAULTS -->
+        <div class="card col-lg-2 " v-for="vault in vaults">
+                              
+                <div class="row text-center">
+                    <h3>{{vault.name}}</h3>
+                    <h5>{{vault.description}}</h5>
+                    <button class="btn btn-danger">DELETE</button>
+                </div>
+    
+                
+            </div>
+        <!-- END VAULTS -->
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
@@ -25,14 +37,14 @@
                         </h1>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form class="form" @submit.prevent="createVault">
                             <div class="form-group">
-                                <label for="Title">Keep Name:</label>
-                                <input type="text" class="form-control" id="Name">
+                                <label for="Title">Vault Name:</label>
+                                <input type="text" class="form-control" id="Name" v-model="vault.name">
                             </div>
                             <div class="form-group">
                                 <label for="Description">Description:</label>
-                                <input type="text" class="form-control" id="Description">
+                                <input type="text" class="form-control" id="Description" v-model="vault.description">
                             </div>
 
                             <button type="submit" class="btn btn-default">Submit</button>
@@ -54,11 +66,35 @@
     export default {
         name: 'vaults',
         data() {
-            return {}
+            return {
+                vault: {
+                    name: '',
+                    description: '',
+                }
+            }
         },
-        computed: {},
-        methods: {},
-        components: {}
+        computed: {
+            user() {
+                return this.$store.state.user
+            },
+            vaults() {
+                return this.$store.state.vaults
+            }
+        },
+        methods: {
+            createVault() {
+                var myVault = {
+                    name: this.vault.name,
+                    description: this.vault.description,
+                    userId: this.user.id
+                }
+                this.$store.dispatch('createVault', myVault)
+            }
+        },
+        components: {},
+        mounted(){
+            this.$store.dispatch("getVaults")
+        },
     }
 </script>
 
@@ -82,5 +118,9 @@
     .glyphicon {
         font-size: 8rem;
         padding-top: 125px;
+    }
+    .text-center {
+        /* text-align: center; */
+        margin: 0 auto;
     }
 </style>

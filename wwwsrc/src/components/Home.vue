@@ -1,5 +1,5 @@
 <template>
-    <div class="Home">
+    <div class="home">
         <div class="row text-center">
             <div class="card col-lg-2">
                 <div class="thumbnail">
@@ -26,8 +26,8 @@
 
 
 <script>
-    import keeps from './keeps'
-    import vaults from './vaults'
+    import keeps from './Keeps'
+    import vaults from './Vaults'
     export default {
         name: 'home',
         data() {

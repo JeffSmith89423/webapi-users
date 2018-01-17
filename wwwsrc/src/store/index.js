@@ -36,12 +36,12 @@ var store = new vuex.Store({
             // debugger
             state.err = err
         },
-        setKeeps(state, data){
+        setKeeps(state, data) {
             console.log(data)
             state.keeps = data
         },
         setVaults(state, data) {
-            state.userVaults = data
+            state.vaults = data
         },
     },
     actions: {
@@ -112,7 +112,7 @@ var store = new vuex.Store({
                     dispatch('getKeeps')
                 })
         },
-        getKeeps({ commit, dispatch }){
+        getKeeps({ commit, dispatch }) {
             api('keeps')
                 .then(res => {
                     // debugger
@@ -120,15 +120,21 @@ var store = new vuex.Store({
                 })
 
         },
-        getVaults({ commit, dispatch }, payload) {
-            auth.post('accounts/Vaults', payload)
+        createVault({ commit, dispatch }, payload) {
+            // debugger
+            api.post('vaults', payload)
                 .then(res => {
+                    dispatch('getVaults')
+                })
+        },
+        getVaults({ commit, dispatch }) {
+            api('vaults')
+                .then(res => {
+                    // debugger
                     commit('setVaults', res.data)
                     console.log(res)
                 })
-                .catch(err => {
-                    commit('handleError', err)
-                })
+
 
         },
     }
@@ -137,16 +143,3 @@ var store = new vuex.Store({
 
 export default store
 
-// login({ commit, dispatch }, payload) {
-//     // debugger
-//     auth.post('accounts/login', payload)
-//         .then(res => {
-//             commit('setUser', res.data)
-//             router.push({ name: 'Home' })
-//             console.log(res)
-//         })
-
-//         .catch(err => {
-//             commit('handleError', err)
-//         })
-// },
