@@ -1,47 +1,47 @@
 <template>
     <div class="Home">
-        <div class="row search-bar">
-            <br></br>
-            <div class="text-center">
-                <button class="btn btn-default">Add a Keep</button>
-                <button class="btn btn-default">Add a vault</button>
-            </div>
-            <br></br>
-            <!-- <form @submit.prevent="getKeeps()" class="text-center">
-                <input class="search" type="text" placeholder="Search for Keeps"> -->
-            <!-- <input class="search" type="text" v-model="keep" placeholder="Search for Keeps"> -->
-            <!-- <button type="submit" class="submit btn-sm btn-default">
-                    <span class="glyphicon glyphicon-search"></span> Search</button>
-            </form> -->
-            
-                <div class="col-sm-4 col-sm-offset-4">
-                    <div class="input-group text">
-                        <input type="text" class="form-control " placeholder="Search for Keeps">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">Search</button>
-                        </span>
-                    </div>
+        <div class="row text-center">
+            <div class="card col-lg-2">
+                <div class="thumbnail">
+                    <img src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?auto=format&fit=crop&w=1355&q=80">
                 </div>
-           
+                <div style="display: inline-flex">
+                    <h4>K: {{0}} |</h4>
+                    <h4>| V: {{0}} |</h4>
+                    <h4>| S: {{0}}</h4>
+                </div>
+                <div class="row">
+                    <h3>Keep Title Here</h3>
+                </div>
 
-
+                <div>
+                    <button class="btn btn-warning">add to vault</button>
+                    <button class="btn btn-danger">view</button>
+                    <button class="btn btn-success">share</button>
+                </div>
+            </div>
         </div>
-        <keeps></keeps>
     </div>
 </template>
 
 
 <script>
     import keeps from './keeps'
+    import vaults from './vaults'
     export default {
         name: 'home',
         data() {
             return {}
         },
-        computed: {},
+        computed: {
+            user() {
+                return this.$store.state.user
+            },
+        },
         methods: {},
         components: {
             keeps,
+            vaults
         }
     }
 </script>
@@ -51,5 +51,24 @@
     .text-center {
         /* text-align: center; */
         margin: 0 auto;
+    }
+    .card {
+        padding: 15px;
+        margin: 25px;
+        height: 400px;
+        background-color: rgba(190, 190, 190, 0.884);
+        box-shadow: 5px 5px rgb(138, 138, 138);
+        border-radius: 6%
+    }
+
+    .card:hover {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.651);
+        box-shadow: 5px 5px rgb(44, 44, 44);
+    }
+
+    .glyphicon {
+        font-size: 8rem;
+        padding-top: 125px;
     }
 </style>

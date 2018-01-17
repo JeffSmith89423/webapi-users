@@ -11,53 +11,60 @@
             <b>error</b>
         </h5> -->
 
-        <div v-if="loginForm" class="login">
+        <div v-if="loginForm" class="login col-sm-4 col-sm-offset-4">
             <form class="form" @submit.prevent="submitLogin">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" placeholder="bob@bob.com" v-model='login.email' required>
+                    <input class="form-control" type="email" name="email" placeholder="User@email.com" v-model='login.email' required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input class="form-control" type="password" placeholder="********" name="password" v-model='login.password' required>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Login</button>
+                    <button type="submit" class="btn btn-default">Login</button>
                 </div>
             </form>
         </div>
+
         <!-- Register Form -->
-        <div v-else class="register">
+        <div v-else class="register col-sm-4 col-sm-offset-4">
             <form class="form" @submit.prevent="submitRegister">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" placeholder="Bob" v-model='register.username' required>
+                    <input class="form-control" type="text" name="name" placeholder="User" v-model='register.username' required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" placeholder="bob@email.com" v-model='register.email' required>
+                    <input class="form-control" type="email" name="email" placeholder="user@email.com" v-model='register.email' required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input class="form-control" type="password" name="password" placeholder="********" v-model='register.password' required>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Register</button>
+                    <button type="submit" class="btn btn-default">Register</button>
                 </div>
             </form>
         </div>
-        <p v-if="loginForm" @click="toggleLoginForm" class="action">Don't have an account?
-            <a><strong>Sign up!</strong></a>
-        </p>
-        <p v-else @click="toggleLoginForm" class="action">Already a user?
-            <a><b>Click here to login</b></a>
-        </p>
+        <div class="panel panel-default col-sm-2 col-sm-offset-5 text-center">
+            <p v-if="loginForm" @click="toggleLoginForm" class="action"><strong>Don't have an account?</strong>
+                <a>
+                    <strong>Sign up!</strong>
+                </a>
+            </p>
+            <p v-else @click="toggleLoginForm" class="action"><strong>Already a user?</strong>
+                <a>
+                    <b>Click here to login</b>
+                </a>
+            </p>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        
+
         data() {
             return {
                 loginForm: true,
@@ -87,16 +94,16 @@
             submitRegister() {
                 // debugger
                 this.$store.dispatch('register', this.register)
-              
+
             }
         },
         computed: {
-                // error() {
-                //     return this.$store.state.error
-                // }
-            }
+            // error() {
+            //     return this.$store.state.error
+            // }
         }
-    
+    }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -117,6 +124,9 @@
     }
 
     a {
-        color: #42b983;
+        color:rgb(51, 122, 183);
+    }
+    .panel{
+        background-color:rgba(240, 248, 255, 0.63);
     }
 </style>

@@ -25,6 +25,7 @@ var store = new vuex.Store({
     state: {
         user: {},
         keeps: [],
+        vaults: []
     },
     mutations: {
         setUser(state, user) {
@@ -34,9 +35,17 @@ var store = new vuex.Store({
         handleError(state, err) {
             // debugger
             state.err = err
-        }
+        },
+        setKeeps(state, data){
+            console.log(data)
+            state.keeps = data
+        },
+        setVaults(state, data) {
+            state.userVaults = data
+        },
     },
     actions: {
+        // AUTH
         register({ commit, dispatch }, payload) {
             // debugger
             auth.post('accounts/register', payload)
@@ -93,8 +102,51 @@ var store = new vuex.Store({
                 })
 
         },
+        // END OF AUTH
 
+        // Gets
+        createKeep({ commit, dispatch }, payload) {
+            // debugger
+            api.post('keeps', payload)
+                .then(res => {
+                    dispatch('getKeeps')
+                })
+        },
+        getKeeps({ commit, dispatch }){
+            api('keeps')
+                .then(res => {
+                    // debugger
+                    commit('setKeeps', res.data)
+                })
+
+        },
+        getVaults({ commit, dispatch }, payload) {
+            auth.post('accounts/Vaults', payload)
+                .then(res => {
+                    commit('setVaults', res.data)
+                    console.log(res)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+
+        },
     }
 })
 
+
 export default store
+
+// login({ commit, dispatch }, payload) {
+//     // debugger
+//     auth.post('accounts/login', payload)
+//         .then(res => {
+//             commit('setUser', res.data)
+//             router.push({ name: 'Home' })
+//             console.log(res)
+//         })
+
+//         .catch(err => {
+//             commit('handleError', err)
+//         })
+// },

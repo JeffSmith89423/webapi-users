@@ -1,22 +1,52 @@
 <template>
 
     <div class="navbar navbar-inverse">
-        <div>
-            <div class="col-xs-8">
-               <a href="#"><h3>Keepr.</h3></a>
-            </div>
-            <div class="col-xs-3 push-right">
-                <h3 v-if="user.username">Welcome, {{user.username}}</h3>
-                <h3 v-if="!user.username">Welcome, guest</h3>
-            </div>
+        <div class="container-fluid">
+            <div class="col-xs-9 breadcrumbs">
 
-            <h3 v-if="user.username" class="col-xs-1 push-right">
-                <a @click="logout">Log Out</a>
-            </h3>
+                <router-link to="/">
+                    <img class="brand navbar-brand push-left" src="../assets/image.png" srcset="">
+                </router-link>
 
-            <h3 v-else="!user.username" class="col-xs-1 push-right">
-                <a href="#login">Log In</a>
-            </h3>
+
+                <ul class="nav navbar-nav">
+                    <li class="brand">
+                        <router-link to="/keeps">
+                            <a v-if="user.username" class="active brand">
+                                <strong>My Keeps</strong>
+                            </a>
+                        </router-link>
+                    </li>
+                    <li class="brand">
+                        <router-link to="/vaults">
+                            <a v-if="user.username" class="active ">
+                                <strong>My Vaults</strong>
+                            </a>
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2">
+                <p class="navbar-text " v-if="user.username">
+                    <strong>Welcome, {{user.username}}</strong>
+                </p>
+                <p class="navbar-text " v-if="!user.username">
+                    <strong>Welcome, Guest</strong>
+                </p>
+            </div>
+            <div class="push-right col-xs-1">
+                <button v-if="user.username" class="btn btn-default navbar-btn ">
+                    <a @click="logout">
+                        <strong>Log Out</strong>
+                    </a>
+                </button>
+
+                <button v-else="!user.username" class="btn btn-default navbar-btn">
+                    <router-link to="/login">
+                        <strong>Log in</strong>
+                    </router-link>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -47,7 +77,7 @@
             },
             login() {
                 // debugger
-                this.$store.dispatch('')
+                this.$store.dispatch('login')
             }
         },
         components: {
@@ -62,10 +92,19 @@
 
 
 <style scoped>
-.push-right{
-    text-align: right;
-}
-.navbar{
-    color: silver;
-}
+    .push-right {
+        text-align: right;
+    }
+
+    .push-left {
+        text-align: left;
+    }
+
+    .navbar {
+        color: silver;
+    }
+
+    .brand:hover {
+        background-color: darkgray;
+    }
 </style>

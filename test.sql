@@ -62,3 +62,13 @@
 
 -- DELETE from vaults WHERE id = 2;
 -- DELETE FROM users WHERE id = 1;
+
+-- ALTER TABLE keeps
+-- ADD COLUMN saves int(20)
+-- AFTER userid
+
+-- ALTER TABLE keeps
+-- DROP COLUMN keepcount;
+
+-- ALTER TABLE keeps
+-- MODIFY COLUMN imageurl VARCHAR(255);
