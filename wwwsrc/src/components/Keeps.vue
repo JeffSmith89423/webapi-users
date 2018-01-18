@@ -101,7 +101,7 @@
                             <ul >
 
                                 <li v-if="user.id == vault.userId">
-                                    <button class="btn btn-default" @click>{{vault.name}}</button>
+                                    <button class="btn btn-default" @click="createVaultKeep(vault)">{{vault.name}}</button>
                                 </li>
                             </ul>
                         </div>
@@ -136,6 +136,11 @@
                 vault: {
                     name: '',
                 },
+                vaultkeep: {
+                    vaultId: this.vaults,
+                    keepId: this.keeps,
+                    userId: this.user,
+                }
             }
         },
         computed:
@@ -148,6 +153,9 @@
                 },
                 vaults() {
                     return this.$store.state.vaults
+                },
+                vaultKeeps() {
+                    return this.$store.state.vaultKeep
                 }
             },
         methods: {
@@ -160,6 +168,14 @@
                 }
                 this.$store.dispatch('createKeep', myKeep)
             },
+            createVaultKeep(){
+                var myVaultKeep = {
+                    vaultId: this.vaultkeep.vaultId,
+                    keepId: this.vaultkeep.keepId,
+                    userId: this.vaultkeep.userId
+                }
+                this.$store.dispatch('createVaultKeep', myVaultKeep)
+            }
 
         },
         components: {},

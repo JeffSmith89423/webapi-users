@@ -26,7 +26,8 @@ var store = new vuex.Store({
         user: {},
         keeps: [],
         vaults: [],
-        vaultKeep:[]
+        vaultKeep:[],
+        activeKeep: [],
     },
     mutations: {
         setUser(state, user) {
@@ -44,6 +45,10 @@ var store = new vuex.Store({
         setVaults(state, data) {
             state.vaults = data
         },
+        setVaultKeeps(state, data){
+            state.vaultKeep = data
+        }
+
     },
     actions: {
         // AUTH
@@ -120,6 +125,19 @@ var store = new vuex.Store({
                     commit('setKeeps', res.data)
                 })
 
+        },
+        createVaultKeep({commit, dispatch}, payload){
+            debugger
+            api.post('vaultkeeps', payload)
+            .then(res => {
+                dispatch('getVaultKeeps')
+            })
+        },
+        getVaultKeeps({ commit, dispatch}){
+            api('vaultkeeps')
+            .then(res => {
+                commit('setVaultKeeps', res.data)
+            })
         },
         createVault({ commit, dispatch }, payload) {
             // debugger

@@ -12,17 +12,19 @@
         <!-- END ADD A VAULT -->
 
         <!-- BEGIN VAULTS -->
-        <div  v-for="vault in vaults">
-                <div class="card col-lg-2 " v-if="user.id == vault.userId">         
-                <div class="row text-center">
-                    <h3>{{vault.name}}</h3>
-                    <h5>{{vault.description}}</h5>
-                    <button class="btn btn-danger" @click="deleteVault">DELETE</button>
+        <div v-for="vault in vaults">
+            <router-link to="/vaultkeep">
+                <div class="card col-lg-2 " v-if="user.id == vault.userId">
+                    <div class="row text-center">
+                        <h3>{{vault.name}}</h3>
+                        <h5>{{vault.description}}</h5>
+                        <button class="btn btn-danger" @click="deleteVault">DELETE</button>
+                    </div>
                 </div>
-                </div>
-    
-                
-            </div>
+            </router-link>
+
+
+        </div>
         <!-- END VAULTS -->
 
         <!-- Modal -->
@@ -91,12 +93,12 @@
                 }
                 this.$store.dispatch('createVault', myVault)
             },
-            deleteVault(){
+            deleteVault() {
                 this.$store.dispatch('deleteVault')
             }
         },
         components: {},
-        mounted(){
+        mounted() {
             this.$store.dispatch("getVaults")
         },
     }
@@ -123,6 +125,7 @@
         font-size: 8rem;
         padding-top: 125px;
     }
+
     .text-center {
         /* text-align: center; */
         margin: 0 auto;
