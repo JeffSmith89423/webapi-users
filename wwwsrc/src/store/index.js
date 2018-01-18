@@ -25,7 +25,8 @@ var store = new vuex.Store({
     state: {
         user: {},
         keeps: [],
-        vaults: []
+        vaults: [],
+        vaultKeep:[]
     },
     mutations: {
         setUser(state, user) {
@@ -136,6 +137,13 @@ var store = new vuex.Store({
                 })
 
 
+        },
+        deleteVault({ commit, dispatch }) {
+            // debugger
+            api.delete('vaults')
+                .then(res => {
+                    dispatch('getVaults')
+                })
         },
     }
 })

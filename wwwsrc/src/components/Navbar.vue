@@ -10,17 +10,17 @@
 
 
                 <ul class="nav navbar-nav">
-                    <li class="brand">
+                    <li class="brand" v-if="user.username">
                         <router-link to="/keeps">
-                            <a v-if="user.username" class="active brand">
-                                <strong>My Keeps</strong>
+                            <a  >
+                                <strong class="active brand">My Keeps</strong>
                             </a>
                         </router-link>
                     </li>
-                    <li class="brand">
+                    <li class="brand" v-if="user.username"la>
                         <router-link to="/vaults">
-                            <a v-if="user.username" class="active ">
-                                <strong>My Vaults</strong>
+                            <a  >
+                                <strong class="active brand">My Vaults</strong>
                             </a>
                         </router-link>
                     </li>

@@ -12,12 +12,13 @@
         <!-- END ADD A VAULT -->
 
         <!-- BEGIN VAULTS -->
-        <div class="card col-lg-2 " v-for="vault in vaults">
-                              
+        <div  v-for="vault in vaults">
+                <div class="card col-lg-2 " v-if="user.id == vault.userId">         
                 <div class="row text-center">
                     <h3>{{vault.name}}</h3>
                     <h5>{{vault.description}}</h5>
-                    <button class="btn btn-danger">DELETE</button>
+                    <button class="btn btn-danger" @click="deleteVault">DELETE</button>
+                </div>
                 </div>
     
                 
@@ -89,6 +90,9 @@
                     userId: this.user.id
                 }
                 this.$store.dispatch('createVault', myVault)
+            },
+            deleteVault(){
+                this.$store.dispatch('deleteVault')
             }
         },
         components: {},
