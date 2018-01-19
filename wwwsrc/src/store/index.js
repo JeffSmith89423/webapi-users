@@ -27,7 +27,7 @@ var store = new vuex.Store({
         keeps: [],
         vaults: [],
         vaultKeep:[],
-        activeKeep: [],
+        activeKeep: {},
     },
     mutations: {
         setUser(state, user) {
