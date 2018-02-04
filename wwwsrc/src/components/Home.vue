@@ -14,14 +14,22 @@
                     <h4>| S: {{keep.shares}}</h4>
                 </div>
                 <div class="row text-center">
+
                     <h3>{{keep.name}}</h3>
                     <h5>{{keep.description}}</h5>
+                    <h5>{{keep.userId}}</h5>
+                    
                 </div>
 
-                <div class="text-center">
+                <div class="text-center" v-if="user.username">
                     <button class="btn btn-warning" data-toggle="modal" data-target="#myModal1">Save</button>
                     <button class="btn btn-primary" @click="">View</button>
-                    <button class="btn btn-success" @click="">Share</button>
+                    <!-- <button class="btn btn-success" @click="">Share</button> -->
+                </div>
+                <div class="text-center" v-else="!user.username">
+                    <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#myModal1">Save</button> -->
+                    <button class="btn btn-primary" @click="">View</button>
+                    <!-- <button class="btn btn-success" @click="">Share</button> -->
                 </div>
             </div>
         </div>

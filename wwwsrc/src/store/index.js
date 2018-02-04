@@ -26,7 +26,7 @@ var store = new vuex.Store({
         user: {},
         keeps: [],
         vaults: [],
-        vaultKeep:[],
+        vaultKeep: [],
         activeKeep: {},
         activeVault: {},
     },
@@ -46,18 +46,18 @@ var store = new vuex.Store({
         setVaults(state, data) {
             state.vaults = data
         },
-        setVaultKeeps(state, data){
+        setVaultKeeps(state, data) {
             state.vaultKeep = data
         },
-        setActiveKeep(state, data){
+        setActiveKeep(state, data) {
             console.log("activeKeep=", data)
             state.activeKeep = data
         },
-        setActiveVault(state, data){
+        setActiveVault(state, data) {
             console.log("activeVault=", data)
             state.activeVault = data
         }
-        
+
 
     },
     actions: {
@@ -136,18 +136,28 @@ var store = new vuex.Store({
                 })
 
         },
-        createVaultKeep({commit, dispatch}, payload){
+        deleteKeep({ commit, dispatch }, payload) { 
+            api.delete('keeps/' + payload.id)
+                .then(res => {
+                    dispatch('getKeeps', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        createVaultKeep({ commit, dispatch }, payload) {
             // debugger
             api.post('vaultkeeps/', payload)
-            .then(res => {
-                dispatch('getKeeps')
-            })
+                .then(res => {
+                    dispatch('getKeeps')
+                })
         },
-        getKeepsByVault({ commit, dispatch}, payload){debugger
+        getKeepsByVault({ commit, dispatch }, payload) {
+            debugger
             api('vaultkeeps/' + payload)
-            .then(res => {
-                commit('setVaultKeeps', res.data)
-            })
+                .then(res => {
+                    commit('setVaultKeeps', res.data)
+                })
         },
         createVault({ commit, dispatch }, payload) {
             // debugger
@@ -166,17 +176,17 @@ var store = new vuex.Store({
 
 
         },
-        deleteVault({ commit, dispatch }) {
+        deleteVault({ commit, dispatch }, payload) {
             // debugger
-            api.delete('vaults')
+            api.delete('vaults/', payload.id)
                 .then(res => {
                     dispatch('getVaults')
                 })
         },
-        setActiveVault({commit}, payload) {
+        setActiveVault({ commit }, payload) {
             commit('setActiveVault', payload)
         },
-        setActiveKeep({commit}, payload) {
+        setActiveKeep({ commit }, payload) {
             commit('setActiveKeep', payload)
         }
     }

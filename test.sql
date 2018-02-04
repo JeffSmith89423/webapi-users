@@ -49,9 +49,9 @@
 -- INNER JOIN keeps k ON k.id = vk.keepId 
 -- WHERE (vaultId = 2)
 
--- DELETE FROM keeps WHERE id = 1;
+-- DELETE FROM keeps WHERE id = 26 ;
 
--- DELETE from vaults WHERE id = 2;
+DELETE FROM vaults WHERE id = 1;
 -- DELETE FROM users WHERE id = 1;
 
 -- ALTER TABLE keeps

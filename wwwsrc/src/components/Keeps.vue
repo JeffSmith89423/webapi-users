@@ -33,7 +33,7 @@
                 <div class="text-center">
                     <button class="btn btn-warning" data-toggle="modal" data-target="#myModal1" @click='setActiveKeep(keep)'>Save</button>
                     <button class="btn btn-primary" @click="">View</button>
-                    <button class="btn btn-success" @click="">Share</button>
+                    <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                                 <label>
                                     <input type="checkbox"> Keep Private?</label>
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default" >Submit</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -185,6 +185,11 @@
                     keepId: this.activeKeep.id,
                 }
                 this.$store.dispatch('createVaultKeep', myVaultKeep)
+            },
+            deleteKeep(keep){
+                // debugger
+                this.$store.dispatch('deleteKeep', keep)
+                
             }
 
         },
