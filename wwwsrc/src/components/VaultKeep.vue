@@ -1,7 +1,9 @@
 <template>
     <div class="vaultkeep">
+        <p></p>
+
         <!-- BEGIN KEEPS -->
-        <div v-for="keep in keeps">
+        <!-- <div v-for="keep in keeps">
             <div class="card col-lg-2 " v-if="user.id == keep.userId">
                 <div class="thumbnail" v-if="keep.imageurl === null">
                     <img src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?auto=format&fit=crop&w=1355&q=80">
@@ -25,7 +27,7 @@
                     <button class="btn btn-success" @click="">Share</button>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- END KEEPS -->
     </div>
 </template>
@@ -46,12 +48,23 @@
             },
             vaults(){
                 return this.$store.state.vaults
+            },
+            vaultKeep(){
+                return this.$store.state.vaultKeep
+            },
+            activeKeep(){
+                return this.$store.state.activeKeep
+            },
+            activeVault(){
+                return this.$store.state.activeVault
             }
         },
         methods: {},
         components: {},
         mounted() {
+            this.$store.dispatch("getKeepsByVault")
             this.$store.dispatch("getKeeps")
+
 
         },
     }

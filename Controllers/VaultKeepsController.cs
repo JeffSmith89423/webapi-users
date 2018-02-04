@@ -4,50 +4,57 @@ using System.Linq;
 using System.Threading.Tasks;
 using Keepr.Models;
 using Keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Keepr.Controllers
 {
     [Route("api/[controller]")]
-    public class VaultKeepController : Controller
+    public class VaultKeepsController : Controller
     {
         private readonly VaultKeepRepository db;
-        public VaultKeepController(VaultKeepRepository vaultKeepRepo)
+        public VaultKeepsController(VaultKeepRepository vaultKeepRepo)
         {
             db = vaultKeepRepo;
         }
 
         // GET api/values
-        [HttpGet]
-        public IEnumerable<VaultKeep> GetAll()
+        [HttpGet("{id}")]
+        public IEnumerable<Keep> GetAllByVaultId(int id)
         {
-            return db.GetAll();
+            return db.GetAll(id);
         }
 
         // GET api/values/
-        [HttpGet("{id}")]
-        public VaultKeep Get(int id)
-        {
-            return db.GetById(id);
-        }
+        // [HttpGet("{id}")]
+        // public VaultKeep Get(int id)
+        // {
+        //     return db.GetById(id);
+        // }
 
         // POST api/values
+        [Authorize]
         [HttpPost]
-        public VaultKeep Post([FromBody]VaultKeep vaultKeep)
+        public VaultKeep Post([FromBody]VaultKeep vaultkeep)
         {
-            return db.Add(vaultKeep);
+            var user = HttpContext.User.Identity.Name; 
+            int Id;
+            int.TryParse( user, out Id);
+            vaultkeep.UserId = Id;
+            return db.Add(vaultkeep);
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public VaultKeep Put(int id, [FromBody]VaultKeep vaultKeep)
-        {
-            if (ModelState.IsValid)
-            {
-                return db.GetOneByIdAndUpdate(id, vaultKeep);
-            }
-            return null;
-        }
+        // [HttpPut("{id}")]
+        // public VaultKeep Put(int id, [FromBody]VaultKeep vaultkeep)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         return db.GetOneByIdAndUpdate(id, vaultkeep);
+        //     }
+        //     return null;
+        // }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]

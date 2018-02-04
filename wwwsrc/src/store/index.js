@@ -6,13 +6,13 @@ import debug from 'util'
 
 
 let api = axios.create({
-    baseURL: 'http://localhost:5000/api/',
+    baseURL: '//localhost:5000/api/',
     timeout: 2000,
     withCredentials: true
 })
 
 let auth = axios.create({
-    baseURL: 'http://localhost:5000/',
+    baseURL: '//localhost:5000/',
     timeout: 2000,
     withCredentials: true
 })
@@ -28,6 +28,7 @@ var store = new vuex.Store({
         vaults: [],
         vaultKeep:[],
         activeKeep: {},
+        activeVault: {},
     },
     mutations: {
         setUser(state, user) {
@@ -47,7 +48,16 @@ var store = new vuex.Store({
         },
         setVaultKeeps(state, data){
             state.vaultKeep = data
+        },
+        setActiveKeep(state, data){
+            console.log("activeKeep=", data)
+            state.activeKeep = data
+        },
+        setActiveVault(state, data){
+            console.log("activeVault=", data)
+            state.activeVault = data
         }
+        
 
     },
     actions: {
@@ -127,14 +137,14 @@ var store = new vuex.Store({
 
         },
         createVaultKeep({commit, dispatch}, payload){
-            debugger
-            api.post('vaultkeeps', payload)
+            // debugger
+            api.post('vaultkeeps/', payload)
             .then(res => {
-                dispatch('getVaultKeeps')
+                dispatch('getKeeps')
             })
         },
-        getVaultKeeps({ commit, dispatch}){
-            api('vaultkeeps')
+        getKeepsByVault({ commit, dispatch}, payload){debugger
+            api('vaultkeeps/' + payload)
             .then(res => {
                 commit('setVaultKeeps', res.data)
             })
@@ -163,6 +173,12 @@ var store = new vuex.Store({
                     dispatch('getVaults')
                 })
         },
+        setActiveVault({commit}, payload) {
+            commit('setActiveVault', payload)
+        },
+        setActiveKeep({commit}, payload) {
+            commit('setActiveKeep', payload)
+        }
     }
 })
 

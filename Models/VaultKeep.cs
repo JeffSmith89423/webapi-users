@@ -4,12 +4,11 @@ namespace Keepr.Models
 {
     public class VaultKeep
     {
-         public int Id { get; set; }
-        [MaxLength(255)]
+        public int Id { get; set; }
+
         public int VaultId { get; set; }
-        [MaxLength(255)]
-        public int KeepId{ get; set; }
-        public string UserId { get; set; }
+        public int KeepId { get; set; }
+        public int UserId { get; set; }
 
     }
 }

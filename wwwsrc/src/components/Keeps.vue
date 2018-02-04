@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#myModal1">Save</button>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#myModal1" @click='setActiveKeep(keep)'>Save</button>
                     <button class="btn btn-primary" @click="">View</button>
                     <button class="btn btn-success" @click="">Share</button>
                 </div>
@@ -137,9 +137,10 @@
                     name: '',
                 },
                 vaultkeep: {
-                    vaultId: this.vaults,
-                    keepId: this.keeps,
-                    userId: this.user,
+                    vaultId: '',
+                    keepId: '',
+                    userId: '',
+                    
                 }
             }
         },
@@ -156,9 +157,18 @@
                 },
                 vaultKeeps() {
                     return this.$store.state.vaultKeep
+                },
+                activeVault(){
+                    return this.$store.state.activeVault
+                },
+                activeKeep(){
+                    return this.$store.state.activeKeep
                 }
             },
         methods: {
+            setActiveKeep(keep){
+                this.$store.dispatch("setActiveKeep", keep)
+            },
             createKeep() {
                 var myKeep = {
                     name: this.keep.name,
@@ -168,11 +178,11 @@
                 }
                 this.$store.dispatch('createKeep', myKeep)
             },
-            createVaultKeep(){
+            createVaultKeep(vault){
+                this.$store.dispatch('setActiveVault', vault)
                 var myVaultKeep = {
-                    vaultId: this.vaultkeep.vaultId,
-                    keepId: this.vaultkeep.keepId,
-                    userId: this.vaultkeep.userId
+                    vaultId: this.activeVault.id,
+                    keepId: this.activeKeep.id,
                 }
                 this.$store.dispatch('createVaultKeep', myVaultKeep)
             }
